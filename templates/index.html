@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CSV to HTML Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: gray;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    form input[type="file"] {
+      margin-bottom: 10px;
+    }
+
+    form input[type="submit"] {
+      background-color:green;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .download-link {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>CSV to HTML Converter</h1>
+
+    {% if error %}
+    <p class="error">Error: Please select a file to upload.</p>
+    {% endif %}
+
+    {% if converted %}
+    <p class="success">CSV file converted successfully!</p>
+    <div class="download-link">
+      <a href="{{ url_for('download') }}">Download Converted HTML</a>
+    </div>
+    {% else %}
+    <form method="post" action="{{ url_for('convert') }}" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".csv" required>
+      <input type="submit" value="Convert">
+    </form>
+    {% endif %}
+  </div>
+</body>
+
+</html>
+
+
+
